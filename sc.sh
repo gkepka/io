@@ -4,7 +4,7 @@
 #SBATCH --time=05:00:00
 #SBATCH --partition=plgrid
 #SBATCH --account=plgmpr23-cpu
-./setup-environment.sh
-curl https://cran.r-project.org/src/base/R-4/R-4.2.3.tar.gz -o R-4.2.3.tar.gz
-tar xf R-4.2.3.tar.gz
+
+module add scipy-bundle/2021.10-foss-2021b
+chmod +x ./start.R
 R --no-save < start.R
