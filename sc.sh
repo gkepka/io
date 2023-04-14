@@ -5,7 +5,7 @@
 #SBATCH --partition=plgrid
 #SBATCH --account=plgmpr23-cpu
 
-module add scipy-bundle/2021.10-foss-2021b
+# module add scipy-bundle/2021.10-foss-2021b
 module add r/4.2.0-foss-2021b
 
 chmod +x ./start.R
