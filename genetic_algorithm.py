@@ -36,7 +36,7 @@ if __name__ == "__main__":
         problem=problem,
         population_size=population,
         offspring_population_size=offspring,
-        mutation=PermutationSwapMutation(1.0 / problem.number_of_variables),
+        mutation=PermutationSwapMutation(1.0 / problem.number_of_variables()),
         crossover=PMXCrossover(crossover),
         selection=BinaryTournamentSelection(
             MultiComparator([FastNonDominatedRanking.get_comparator(), CrowdingDistance.get_comparator()])
