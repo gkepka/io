@@ -14,7 +14,6 @@ import sys
 if __name__ == "__main__":
    # print(10)
    # exit()
-    print("Python version:", sys.version)
     
 
 
