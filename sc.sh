@@ -9,10 +9,5 @@
 module add r/4.2.0-foss-2021b
 
 chmod +x ./start.R
+./setup-environment.sh
 R --no-save < start.R
-
-
-
-
-# ./setup-environment.sh
-# R --no-save < start.R
