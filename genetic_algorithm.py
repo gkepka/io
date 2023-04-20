@@ -9,11 +9,15 @@ from jmetal.util.ranking import FastNonDominatedRanking
 from jmetal.util.termination_criterion import StoppingByEvaluations
 
 import argparse
+import sys
 
 if __name__ == "__main__":
    # print(10)
    # exit()
+    print("Python version:", sys.version)
     
+
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-i')
     parser.add_argument('-p')
