@@ -1,7 +1,11 @@
-Przygotowanie środowiska:
+Uruchomienie tuningu na superkomputerze Ares:
 
-`./setup-enviroment.sh`
+`sbatch sc.sh`
 
-Uruchomienie tuningu:
+Sprawdzenie stanu uruchomionych zadań:
 
-`R --no-save < start.R`
+`squeue`
+
+Sprawdzenie zużycia przestrzeni dyskowej:
+
+`hpc-fs`
