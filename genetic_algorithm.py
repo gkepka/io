@@ -12,10 +12,8 @@ import argparse
 import sys
 
 if __name__ == "__main__":
-   # print(10)
-   # exit()
-    
-
+    # print(10)
+    # exit()
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-i')
@@ -23,14 +21,13 @@ if __name__ == "__main__":
     parser.add_argument('-o')
     parser.add_argument('-c')
     args = parser.parse_args()
-    
+
     instance = args.i
     population = int(args.p)
     offspring = int(args.o)
     crossover = float(args.c)
-    
 
-    problem = TSP(instance)    
+    problem = TSP(instance)
 
     algorithm = GeneticAlgorithm(
         problem=problem,
@@ -46,5 +43,5 @@ if __name__ == "__main__":
 
     algorithm.run()
     result = algorithm.get_result()
-    
+
     print(result.objectives[0])
