@@ -13,8 +13,9 @@ STARTING_ENERGY = 100
 BREED_ENERGY = 150
 FIGHT_ENERGY = 5
 TO_CHILD_ENERGY = 50
-POPULATION_SIZE = 1000
+POPULATION_SIZE = 100
 MUTATION_PROB = 0.05
+ALPHA = 0.5 # used in crossover_blend
 # not an iRace parameters
 DIMENSIONS = 4
 NUM_OF_GENERATION = 100000
@@ -34,7 +35,7 @@ def mutate(individual, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB):
     return individual
 
 
-def crossover(ind1, ind2):
+def crossover_one_point(ind1, ind2):
     crossover_point = random.randint(1, DIMENSIONS-1)
     child = toolbox.individual()
     for i in range(0, crossover_point):
@@ -47,13 +48,27 @@ def crossover(ind1, ind2):
     ind2.energy -= TO_CHILD_ENERGY
     return child
 
-def crossover2(ind1, ind2):
+def crossover_uniform(ind1, ind2):
     child = toolbox.individual()
     for i in range(0, DIMENSIONS):
         if bool(random.getrandbits(1)):
             child[i] = ind1[i]
         else:
             child[i] = ind2[i]
+    child.energy = 2 * TO_CHILD_ENERGY
+    ind1.energy -= TO_CHILD_ENERGY
+    ind2.energy -= TO_CHILD_ENERGY
+    return child
+
+def crossover_blend(ind1, ind2):
+    child = toolbox.individual()
+    u = random.uniform(0, 1)
+    gamma = (1 + 2*ALPHA)*u - ALPHA
+    for i in range(0, DIMENSIONS):
+        if ind1[i] < ind2[i]:
+            child[i] = (1 - gamma)*ind1[i] + gamma*ind2[i]
+        else:
+            child[i] = (1 - gamma)*ind1[i] + gamma*ind2[i]
     child.energy = 2 * TO_CHILD_ENERGY
     ind1.energy -= TO_CHILD_ENERGY
     ind2.energy -= TO_CHILD_ENERGY
@@ -87,7 +102,7 @@ def new_generation(population: list):
     if len(good_candidates) % 2 != 0:
         good_candidates.pop()
     for i in range(0, len(good_candidates), 2):
-        child = crossover2(good_candidates[i], good_candidates[i + 1])
+        child = crossover_blend(good_candidates[i], good_candidates[i + 1])
         mutate(child)
         population.append(child)
 
@@ -118,7 +133,7 @@ toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.att
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 toolbox.register("evaluate", evaluate)
-toolbox.register("mate", crossover2)
+toolbox.register("mate", crossover_blend)
 toolbox.register("mutate", mutate, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB)
 toolbox.register("interact", interact)
 toolbox.register("arrange_meetings", arrange_meetings)
