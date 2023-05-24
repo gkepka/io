@@ -29,5 +29,5 @@
 breed_energy              "-b "        i   (125, 200)
 fight_energy              "-f "        i   (1, 25)
 ## population_size           "-p "       i   (50, 200)
-mutation_probability      "-m "        r   (0.01, 0.5)    
+mutation_probability      "-m "        r   (0.001, 0.2)    
 alpha                     "-a "        r   (0.1, 0.9)
