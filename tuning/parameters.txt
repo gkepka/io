@@ -25,7 +25,9 @@
 ##    other parameters. This expression must return TRUE if the 
 ##    condition is satisfied, FALSE otherwise.
 
-# 1:            2:                   3:  4:         5:
-population_size           "-p "       i  (50, 150)  
-offspring_population_size "-o "       i  (50, 150)
-crossover                 "-c "       r  (0.3, 0.9)
+# 1:                      2:          3:  4:          5:
+breed_energy              "-b"        i   (125, 200)
+fight_energy              "-f"        i   (1, 25)
+## population_size           "-p "       i   (50, 200)
+mutation_probability      "-m"        r   (0.01, 0.5)    
+alpha                     "-a"        r   (0.1, 0.9)

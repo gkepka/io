@@ -9,5 +9,5 @@
 ## then the configuration is discarded.
 ##
 ## Examples of valid logical operators are: ==  !=  >=  <=  >  <  &  |  !  %in%
-population_size %% 2 != 0
-offspring_population_size %% 2 != 0
+## population_size %% 2 != 0
+## offspring_population_size %% 2 != 0
