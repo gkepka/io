@@ -80,7 +80,7 @@ def crossover_blend(ind1, ind2):
         if ind1[i] < ind2[i]:
             child[i] = (1 - gamma)*ind1[i] + gamma*ind2[i]
         else:
-            child[i] = (1 - gamma)*ind1[i] + gamma*ind2[i]
+            child[i] = (1 - gamma)*ind2[i] + gamma*ind1[i]
     child.energy = 2 * TO_CHILD_ENERGY
     ind1.energy -= TO_CHILD_ENERGY
     ind2.energy -= TO_CHILD_ENERGY
@@ -91,11 +91,21 @@ def interact(ind1, ind2):
     eval_1 = evaluate(ind1)
     eval_2 = evaluate(ind2)
     if eval_1 > eval_2:
-        ind1.energy -= FIGHT_ENERGY
-        ind2.energy += FIGHT_ENERGY
+        if ind1.energy < FIGHT_ENERGY:
+            tmp = ind1.energy
+            ind2.energy += tmp
+            ind1.energy = 0
+        else:
+            ind1.energy -= FIGHT_ENERGY
+            ind2.energy += FIGHT_ENERGY
     elif eval_1 < eval_2:
-        ind1.energy += FIGHT_ENERGY
-        ind2.energy -= FIGHT_ENERGY
+        if ind2.energy < FIGHT_ENERGY:
+            tmp = ind2.energy
+            ind1.energy += tmp
+            ind2.energy = 0
+        else:
+            ind1.energy += FIGHT_ENERGY
+            ind2.energy -= FIGHT_ENERGY
     return ind1, ind2
 
 
