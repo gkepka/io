@@ -1,9 +1,12 @@
 #!/bin/bash -l
 #SBATCH --nodes 1
-#SBATCH --ntasks 1
-#SBATCH --time=05:00:00
+#SBATCH --ntasks-per-node=48
+#SBATCH --time=08:00:00
+#SBATCH --mem=5G
 #SBATCH --partition=plgrid
-#SBATCH --account=plgmpr23-cpu
+#SBATCH --account=plgintobllab
+#SBATCH --output="log.txt"
+#SBATCH --error="err.txt"
 
 module add r/4.2.0-foss-2021b
 

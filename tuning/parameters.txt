@@ -26,8 +26,11 @@
 ##    condition is satisfied, FALSE otherwise.
 
 # 1:                      2:          3:  4:          5:
+## population_size           "-p "       i   (50, 200)
 breed_energy              "-b "        i   (125, 200)
 fight_energy              "-f "        i   (1, 25)
-## population_size           "-p "       i   (50, 200)
-mutation_probability      "-m "        r   (0.001, 0.2)    
-alpha                     "-a "        r   (0.1, 0.9)
+mutation_probability      "-m "        r   (0.001, 0.2)
+crossover                 "-c "        c   ("one_point", "uniform", "blend", "sbx")
+alpha                     "-a "        r   (0.1, 0.9) | crossover == "blend"
+eta                       "-e "        i   (1, 20)    | crossover == "sbx"
+

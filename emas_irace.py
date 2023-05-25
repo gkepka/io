@@ -7,43 +7,27 @@ from OptimizationTestFunctions import Rastrigin
 
 import argparse
 import sys
-
-parser = argparse.ArgumentParser()
-parser.add_argument('-b')
-parser.add_argument('-f')
-parser.add_argument('-m')
-parser.add_argument('-a')
-args = parser.parse_args()
-
-BREED_ENERGY = int(args.b)
-FIGHT_ENERGY = int(args.f)
-MUTATION_PROB = float(args.m)
-ALPHA = float(args.a) # used in crossover_blend
-# not an iRace parameters
-STARTING_ENERGY = 100
-TO_CHILD_ENERGY = 50
-POPULATION_SIZE = 100
-DIMENSIONS = 100
-NUM_OF_GENERATION = 10000
-LOW, HIGH = -6, 6
-
-f = Rastrigin(DIMENSIONS)
-
-'''
-FUNCTIONS
-'''
-
-def evaluate(individual):
-    # individual is a list (gene)
-    return f(np.array(individual)),
+import itertools
 
 
-def mutate(individual, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB):
-    for i in range(DIMENSIONS):
-        if random.random() < indpb:
-            individual[i] = random.uniform(lower_bound, upper_bound)
-    return individual
+class Island:
+    def __init__(self, neighbours):
+        self.neighbours = neighbours
+        
+    def get_random_neighbour(self):
+        if len(self.neighbours) == 0:
+            return self
+        index = random.randint(0, len(self.neighbours)-1)
+        return self.neighbours[index]
+    
 
+island1 = Island([])
+                                                #     i1
+island2 = Island([island1])                     #    /  \   traversal only up
+island3 = Island([island1])                     #   i2  i3
+                                                #    | \ |
+island4 = Island([island2, island3])            #   i5-->i4
+island5 = Island([island2, island3, island4])
 
 def crossover_one_point(ind1, ind2):
     crossover_point = random.randint(1, DIMENSIONS-1)
@@ -52,7 +36,6 @@ def crossover_one_point(ind1, ind2):
         child[i] = ind1[i]
     for i in range(crossover_point, DIMENSIONS):
         child[i] = ind2[i]
-
     child.energy = 2 * TO_CHILD_ENERGY
     ind1.energy -= TO_CHILD_ENERGY
     ind2.energy -= TO_CHILD_ENERGY
@@ -87,6 +70,79 @@ def crossover_blend(ind1, ind2):
     return child
 
 
+def crossover_sbx(ind1, ind2):
+    ind1_clone = toolbox.clone(ind1)
+    ind2_clone = toolbox.clone(ind2)
+    tools.cxSimulatedBinary(ind1_clone, ind2_clone, ETA)
+    child = ind1_clone
+    child.energy = 2 * TO_CHILD_ENERGY
+    ind1.energy -= TO_CHILD_ENERGY
+    ind2.energy -= TO_CHILD_ENERGY
+    return child
+
+def get_crossover(name):
+    if name == 'one_point':
+        return crossover_one_point
+    elif name == 'uniform':
+        return crossover_uniform
+    elif name == 'blend':
+        return crossover_blend
+    elif name == 'sbx':
+        return crossover_sbx
+    else:
+        raise Exception("Unknown crossover type")
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-b')
+parser.add_argument('-f')
+parser.add_argument('-m')
+parser.add_argument('-a')
+parser.add_argument('-e')
+parser.add_argument('-c')
+args = parser.parse_args()
+
+BREED_ENERGY = int(args.b)
+FIGHT_ENERGY = int(args.f)
+MUTATION_PROB = float(args.m)
+CROSSOVER = get_crossover(args.c)
+if args.a is not None:
+    ALPHA = float(args.a) # used in crossover_blend - between 0 and 1
+if args.e is not None:
+    ETA = int(args.e) # used in crossover_sbx - between 1 and 20
+
+# not an iRace parameters
+STARTING_ENERGY  = 100
+TO_CHILD_ENERGY  = 50
+MIGRATION_ENERGY = 150
+POPULATION_SIZE  = 100
+DIMENSIONS = 100
+NUM_OF_GENERATION = 10000
+LOW, HIGH = -6, 6
+
+f = Rastrigin(DIMENSIONS)
+
+'''
+FUNCTIONS
+'''
+
+def evaluate(individual):
+    # individual is a list (gene)
+    return f(np.array(individual)),
+
+
+def mutate(individual, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB):
+    for i in range(DIMENSIONS):
+        if random.random() < indpb:
+            individual[i] = random.uniform(lower_bound, upper_bound)
+    return individual
+
+
+def migrate(population):
+    for ind in population:
+        if (ind.energy >= MIGRATION_ENERGY):
+            ind.island = ind.island.get_random_neighbour()
+
+
 def interact(ind1, ind2):
     eval_1 = evaluate(ind1)
     eval_2 = evaluate(ind2)
@@ -110,9 +166,12 @@ def interact(ind1, ind2):
 
 
 def arrange_meetings(population):
-    random.shuffle(population)
-    for i in range(0, len(population) // 2, 2):
-        interact(population[i], population[i + 1])
+    #for island, individuals in itertools.groupby(population, lambda x: x.island):
+        #individuals = list(individuals)
+    individuals = population
+    random.shuffle(individuals)
+    for i in range(0, len(individuals) // 2, 2):
+        interact(individuals[i], individuals[i + 1])
 
 
 def wipe_dead(population):
@@ -120,12 +179,15 @@ def wipe_dead(population):
 
 
 def new_generation(population: list):
-    good_candidates = list(filter(lambda x: x.energy >= BREED_ENERGY, population))
+    #for island, individuals in itertools.groupby(population, lambda x: x.island):
+        #individuals = list(individuals)
+    individuals = population
+    good_candidates = list(filter(lambda x: x.energy >= BREED_ENERGY, individuals))
     random.shuffle(good_candidates)
     if len(good_candidates) % 2 != 0:
         good_candidates.pop()
     for i in range(0, len(good_candidates), 2):
-        child = crossover_blend(good_candidates[i], good_candidates[i + 1])
+        child = toolbox.mate(good_candidates[i], good_candidates[i + 1])
         mutate(child)
         population.append(child)
 
@@ -145,7 +207,7 @@ PREPARATION OF GEN ALG
 '''
 
 creator.create("FitnessMax", base.Fitness, weights=(-1.0,))
-creator.create("Individual", list, fitness=creator.FitnessMax, energy=100)
+creator.create("Individual", list, fitness=creator.FitnessMax, energy=100, island=island5)
 
 toolbox = base.Toolbox()
 
@@ -156,7 +218,7 @@ toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.att
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 toolbox.register("evaluate", evaluate)
-toolbox.register("mate", crossover_blend)
+toolbox.register("mate", CROSSOVER)
 toolbox.register("mutate", mutate, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB)
 toolbox.register("interact", interact)
 toolbox.register("arrange_meetings", arrange_meetings)
@@ -172,6 +234,7 @@ MAIN LOOP
 3.  Rozmnóż
 '''
 for gen in range(NUM_OF_GENERATION):  # Number of generations
+    #migrate(population)
     toolbox.arrange_meetings(population)
     population = toolbox.wipe_dead(population)
     toolbox.new_generation(population)
