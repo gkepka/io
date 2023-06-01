@@ -3,7 +3,7 @@ from functools import reduce
 import numpy as np
 from deap import base, creator, tools
 import argparse
-from OptimizationTestFunctions import Rastrigin
+from OptimizationTestFunctions import Rastrigin, Sphere
 
 import argparse
 import sys
@@ -12,8 +12,8 @@ import statistics
 
 import igraph as ig
 
-#g = ig.Graph.Full(3)
-g = ig.Graph(n=3, edges=[[0,1], [1,2]], directed=True)
+g = ig.Graph.Full(3)
+#g = ig.Graph(n=3, edges=[[0,1], [1,2]], directed=True)
 
 def crossover_one_point(ind1, ind2):
     crossover_point = random.randint(1, DIMENSIONS-1)
@@ -109,6 +109,8 @@ MIGRATION_COST = 10
 MIGRATION_PROB = 0.01
 
 f = Rastrigin(DIMENSIONS)
+#f = Sphere(DIMENSIONS)
+
 
 '''
 FUNCTIONS
@@ -140,7 +142,7 @@ def migrate(population):
             random.shuffle(recipients)
             for i in range(0, min(MIGRATION_COST, len(recipients))):
                 recipients[i].energy += 1
-            if MIGRATION_COST > len(recipients):
+            if (MIGRATION_COST > len(recipients)) and (len(recipients) > 0):
                 recipients[0].energy += MIGRATION_COST - len(recipients)
 
 def interact(ind1, ind2):
@@ -191,6 +193,7 @@ def new_generation(population: list):
         for i in range(0, len(good_candidates), 2):
             child = toolbox.mate(good_candidates[i], good_candidates[i + 1])
             mutate(child)
+            child.island = island
             population.append(child)
 
 #def get_genetic_diversity(population):
@@ -238,6 +241,7 @@ MAIN LOOP
 2.  Usuń martwych
 3.  Rozmnóż
 '''
+
 for gen in range(NUM_OF_GENERATION):  # Number of generations
     migrate(population)
     toolbox.arrange_meetings(population)
@@ -254,7 +258,7 @@ print(evaluate(best_ind)[0])
 population = sorted(population, key = lambda x: x.island)
 for island, individuals in itertools.groupby(population, lambda x: x.island):
     print(str(island) + ": " + str(len(list(individuals))))
-#print(best_ind)
+print(best_ind)
 #def get_energy_sum(population):
     #tmp = map(lambda x: x.energy, population)
     #s = 0
