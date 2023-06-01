@@ -12,6 +12,7 @@ module add r/4.2.0-foss-2021b
 
 virtualenv .venv
 source .venv/bin/activate
+pip install igraph
 pip install deap
 pip install OptimizationTestFunctions
 
