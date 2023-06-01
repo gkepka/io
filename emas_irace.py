@@ -12,7 +12,8 @@ import statistics
 
 import igraph as ig
 
-g = ig.Graph.Full(3)
+#g = ig.Graph.Full(3)
+g = ig.Graph(n=3, edges=[[0,1], [1,2]], directed=True)
 
 def crossover_one_point(ind1, ind2):
     crossover_point = random.randint(1, DIMENSIONS-1)
@@ -128,7 +129,10 @@ def mutate(individual, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB):
 def migrate(population):
     for ind in population:
         if (ind.energy >= MIGRATION_ENERGY and random.random() <= MUTATION_PROB):
-            new_island = random.choice(g.neighbors(ind.island))
+            neighbors = g.neighbors(ind.island, mode="out")
+            if (len(neighbors) == 0):
+                break;
+            new_island = random.choice(neighbors)
             ind.island = new_island
             ind.energy -= MIGRATION_COST
             recipients = population.copy()
@@ -162,7 +166,8 @@ def interact(ind1, ind2):
 
 
 def arrange_meetings(population):
-    for island, individuals in itertools.groupby(population, lambda x: x.island):
+    population_sorted = sorted(population, key = lambda x: x.island)
+    for island, individuals in itertools.groupby(population_sorted, lambda x: x.island):
         individuals = list(individuals)
         #individuals = population
         random.shuffle(individuals)
@@ -175,7 +180,8 @@ def wipe_dead(population):
 
 
 def new_generation(population: list):
-    for island, individuals in itertools.groupby(population, lambda x: x.island):
+    population_sorted = sorted(population, key = lambda x: x.island)
+    for island, individuals in itertools.groupby(population_sorted, lambda x: x.island):
         individuals = list(individuals)
         #individuals = population
         good_candidates = list(filter(lambda x: x.energy >= BREED_ENERGY, individuals))
@@ -237,10 +243,17 @@ for gen in range(NUM_OF_GENERATION):  # Number of generations
     toolbox.arrange_meetings(population)
     population = toolbox.wipe_dead(population)
     toolbox.new_generation(population)
+    if (gen % 1000 == 0):
+        population = sorted(population, key = lambda x: x.island)
+        for island, individuals in itertools.groupby(population, lambda x: x.island):
+            print(str(island) + ": " + str(len(list(individuals))))
 
 # Print the best individual found
 best_ind = tools.selBest(population, 1)[0]
 print(evaluate(best_ind)[0])
+population = sorted(population, key = lambda x: x.island)
+for island, individuals in itertools.groupby(population, lambda x: x.island):
+    print(str(island) + ": " + str(len(list(individuals))))
 #print(best_ind)
 #def get_energy_sum(population):
     #tmp = map(lambda x: x.energy, population)
