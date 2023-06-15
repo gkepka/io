@@ -253,19 +253,19 @@ def save_population():
     #   variances_string = ",".join(map(str, variances.tolist()))
     min_var = min(variances)
     with open("results.csv", "a") as file:
-        file.write(str(min_var) + "," + str(size_of_population_current) + "\n")
+        file.write(str(min_var) + "," + str(size_of_population_current) + ',' + str(evaluate(tools.selBest(population, 1)[0])[0]) + "\n")
     return
 
 
 with open("results.csv", "w") as file:
-    file.write("min_var,curr_pop" + "\n")
+    file.write("min_var,curr_pop,max_fit" + "\n")
     # for dim in range(DIMENSIONS):
     #     if dim != DIMENSIONS - 1:
     #         file.write(str(dim) + ",")
     #     else:
     #         file.write(str(dim) + ',')
     #         file.write("pop_size" + "\n")
-
+# todo eval fintessu
 
 for gen in range(NUM_OF_GENERATION):  # Number of generations
     # migrate(population)
