@@ -145,10 +145,11 @@ def migrate(population):
             recipients = population.copy()
             recipients.remove(ind)
             random.shuffle(recipients)
-            for i in range(0, min(MIGRATION_COST, len(recipients))):
-                recipients[i].energy += 1
-            if (MIGRATION_COST > len(recipients)) and (len(recipients) > 0):
-                recipients[0].energy += MIGRATION_COST - len(recipients)
+            energy_to_spend = MIGRATION_COST
+            while (energy_to_spend > 0):
+                for i in range(0, min(energy_to_spend, len(recipients))):
+                    recipients[i].energy += 1
+                energy_to_spend -= min(energy_to_spend, len(recipients))
 
 
 def interact(ind1, ind2):
