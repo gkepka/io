@@ -87,6 +87,9 @@ parser.add_argument("-m")
 parser.add_argument("-a")
 parser.add_argument("-e")
 parser.add_argument("-c")
+parser.add_argument("-z")
+parser.add_argument("-x")
+parser.add_argument("-v")
 args = parser.parse_args()
 
 BREED_ENERGY = int(args.b)
@@ -99,16 +102,16 @@ if args.e is not None:
     ETA = int(args.e)  # used in crossover_sbx - between 1 and 20
 
 # not an iRace parameters
-STARTING_ENERGY = 100
-TO_CHILD_ENERGY = 50
+STARTING_ENERGY = 1000
+TO_CHILD_ENERGY = 500
 POPULATION_SIZE = 100
 DIMENSIONS = 100
 NUM_OF_GENERATION = 10000
 LOW, HIGH = -6, 6
 
-MIGRATION_ENERGY = 150
-MIGRATION_COST = 10
-MIGRATION_PROB = 0.01
+MIGRATION_ENERGY = int(args.z)
+MIGRATION_COST = int(args.x)
+MIGRATION_PROB = float(args.v)
 
 
 f = Rastrigin(DIMENSIONS)
