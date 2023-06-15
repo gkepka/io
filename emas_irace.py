@@ -3,32 +3,17 @@ from functools import reduce
 import numpy as np
 from deap import base, creator, tools
 import argparse
-from OptimizationTestFunctions import Rastrigin
+from OptimizationTestFunctions import Rastrigin, Sphere
 
 import argparse
 import sys
 import itertools
 
-
-class Island:
-    def __init__(self, neighbours):
-        self.neighbours = neighbours
-
-    def get_random_neighbour(self):
-        if len(self.neighbours) == 0:
-            return self
-        index = random.randint(0, len(self.neighbours) - 1)
-        return self.neighbours[index]
+import igraph as ig
 
 
-island1 = Island([])
-#     i1
-island2 = Island([island1])  #    /  \   traversal only up
-island3 = Island([island1])  #   i2  i3
-#    | \ |
-island4 = Island([island2, island3])  #   i5-->i4
-island5 = Island([island2, island3, island4])
-
+g = ig.Graph.Full(3)
+#g = ig.Graph(n=3, edges=[[0,1], [1,2]], directed=True)
 
 def crossover_one_point(ind1, ind2):
     crossover_point = random.randint(1, DIMENSIONS - 1)
@@ -116,11 +101,15 @@ if args.e is not None:
 # not an iRace parameters
 STARTING_ENERGY = 100
 TO_CHILD_ENERGY = 50
-MIGRATION_ENERGY = 150
 POPULATION_SIZE = 100
 DIMENSIONS = 100
 NUM_OF_GENERATION = 10000
 LOW, HIGH = -6, 6
+
+MIGRATION_ENERGY = 150
+MIGRATION_COST = 10
+MIGRATION_PROB = 0.01
+
 
 f = Rastrigin(DIMENSIONS)
 
@@ -143,8 +132,20 @@ def mutate(individual, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB):
 
 def migrate(population):
     for ind in population:
-        if ind.energy >= MIGRATION_ENERGY:
-            ind.island = ind.island.get_random_neighbour()
+        if (ind.energy >= MIGRATION_ENERGY and random.random() <= MUTATION_PROB):
+            neighbors = g.neighbors(ind.island, mode="out")
+            if (len(neighbors) == 0):
+                break;
+            new_island = random.choice(neighbors)
+            ind.island = new_island
+            ind.energy -= MIGRATION_COST
+            recipients = population.copy()
+            recipients.remove(ind)
+            random.shuffle(recipients)
+            for i in range(0, min(MIGRATION_COST, len(recipients))):
+                recipients[i].energy += 1
+            if (MIGRATION_COST > len(recipients)) and (len(recipients) > 0):
+                recipients[0].energy += MIGRATION_COST - len(recipients)
 
 
 def interact(ind1, ind2):
@@ -170,30 +171,32 @@ def interact(ind1, ind2):
 
 
 def arrange_meetings(population):
-    # for island, individuals in itertools.groupby(population, lambda x: x.island):
-    # individuals = list(individuals)
-    individuals = population
-    random.shuffle(individuals)
-    for i in range(0, len(individuals) // 2, 2):
-        interact(individuals[i], individuals[i + 1])
+    population_sorted = sorted(population, key = lambda x: x.island)
+    for island, individuals in itertools.groupby(population_sorted, lambda x: x.island):
+        individuals = list(individuals)
+        #individuals = population
+        random.shuffle(individuals)
+        for i in range(0, len(individuals) // 2, 2):
+            interact(individuals[i], individuals[i + 1])
 
 
 def wipe_dead(population):
     return list(filter(lambda x: x.energy > 0, population))
 
-
 def new_generation(population: list):
-    # for island, individuals in itertools.groupby(population, lambda x: x.island):
-    # individuals = list(individuals)
-    individuals = population
-    good_candidates = list(filter(lambda x: x.energy >= BREED_ENERGY, individuals))
-    random.shuffle(good_candidates)
-    if len(good_candidates) % 2 != 0:
-        good_candidates.pop()
-    for i in range(0, len(good_candidates), 2):
-        child = toolbox.mate(good_candidates[i], good_candidates[i + 1])
-        mutate(child)
-        population.append(child)
+    population_sorted = sorted(population, key = lambda x: x.island)
+    for island, individuals in itertools.groupby(population_sorted, lambda x: x.island):
+        individuals = list(individuals)
+        #individuals = population
+        good_candidates = list(filter(lambda x: x.energy >= BREED_ENERGY, individuals))
+        random.shuffle(good_candidates)
+        if len(good_candidates) % 2 != 0:
+            good_candidates.pop()
+        for i in range(0, len(good_candidates), 2):
+            child = toolbox.mate(good_candidates[i], good_candidates[i + 1])
+            mutate(child)
+            child.island = island
+            population.append(child)
 
 
 """
@@ -212,25 +215,19 @@ PREPARATION OF GEN ALG
 """
 
 creator.create("FitnessMax", base.Fitness, weights=(-1.0,))
-creator.create(
-    "Individual", list, fitness=creator.FitnessMax, energy=100, island=island5
-)
+creator.create("Individual", list, fitness=creator.FitnessMax, energy=100, island=0)
 
 toolbox = base.Toolbox()
 
 # Register the genetic operators
 toolbox.register("attr_float", random.uniform, LOW, HIGH)
-toolbox.register(
-    "individual", tools.initRepeat, creator.Individual, toolbox.attr_float, n=DIMENSIONS
-)
+toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.attr_float, n=DIMENSIONS)
 
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 toolbox.register("evaluate", evaluate)
 toolbox.register("mate", CROSSOVER)
-toolbox.register(
-    "mutate", mutate, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB
-)
+toolbox.register("mutate", mutate, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB)
 toolbox.register("interact", interact)
 toolbox.register("arrange_meetings", arrange_meetings)
 toolbox.register("wipe_dead", wipe_dead)
@@ -268,7 +265,7 @@ with open("results.csv", "w") as file:
 # todo eval fintessu
 
 for gen in range(NUM_OF_GENERATION):  # Number of generations
-    # migrate(population)
+    migrate(population)
     save_population()
     toolbox.arrange_meetings(population)
     population = toolbox.wipe_dead(population)
