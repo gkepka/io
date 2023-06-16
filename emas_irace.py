@@ -135,7 +135,7 @@ def mutate(individual, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB):
 
 def migrate(population):
     for ind in population:
-        if (ind.energy >= MIGRATION_ENERGY and random.random() <= MUTATION_PROB):
+        if (ind.energy >= MIGRATION_ENERGY and random.random() <= MIGRATION_PROB):
             neighbors = g.neighbors(ind.island, mode="out")
             if (len(neighbors) == 0):
                 break;
@@ -204,22 +204,11 @@ def new_generation(population: list):
 
 
 """
-INPUT PARSING
-"""
-# parser = argparse.ArgumentParser()
-# parser.add_argument('-i')
-# parser.add_argument('-p')
-# parser.add_argument('-o')
-# parser.add_argument('-c')
-# args = parser.parse_args()
-
-
-"""
 PREPARATION OF GEN ALG
 """
 
 creator.create("FitnessMax", base.Fitness, weights=(-1.0,))
-creator.create("Individual", list, fitness=creator.FitnessMax, energy=100, island=0)
+creator.create("Individual", list, fitness=creator.FitnessMax, energy=STARTING_ENERGY, island=0)
 
 toolbox = base.Toolbox()
 
@@ -258,8 +247,8 @@ def save_population():
     return
 
 
-with open("results.csv", "w") as file:
-    file.write("min_var,curr_pop,max_fit" + "\n")
+#with open("results.csv", "w") as file:
+    #file.write("min_var,curr_pop,max_fit" + "\n")
     # for dim in range(DIMENSIONS):
     #     if dim != DIMENSIONS - 1:
     #         file.write(str(dim) + ",")
@@ -268,9 +257,12 @@ with open("results.csv", "w") as file:
     #         file.write("pop_size" + "\n")
 # todo eval fintessu
 
+def sum_energy(population):
+    return sum(map(lambda x: x.energy, population))
+
 for gen in range(NUM_OF_GENERATION):  # Number of generations
     migrate(population)
-    save_population()
+    #save_population()
     toolbox.arrange_meetings(population)
     population = toolbox.wipe_dead(population)
     toolbox.new_generation(population)

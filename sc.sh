@@ -4,7 +4,7 @@
 #SBATCH --time=08:00:00
 #SBATCH --mem=5G
 #SBATCH --partition=plgrid
-#SBATCH --account=plgintobllab
+#SBATCH --account=plgintobllab-cpu
 #SBATCH --output="log.txt"
 #SBATCH --error="err.txt"
 
