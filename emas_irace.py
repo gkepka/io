@@ -1,7 +1,7 @@
 import random
 from functools import reduce
 import numpy as np
-from deap import base, creator, tools
+from deap import base, creator, tools, benchmarks
 import argparse
 from OptimizationTestFunctions import Rastrigin, Sphere
 
@@ -114,7 +114,8 @@ MIGRATION_COST = int(args.x)
 MIGRATION_PROB = float(args.v)
 
 
-f = Rastrigin(DIMENSIONS)
+#f = Rastrigin(DIMENSIONS)
+f = benchmarks.rastrigin
 
 """
 FUNCTIONS
@@ -123,7 +124,8 @@ FUNCTIONS
 
 def evaluate(individual):
     # individual is a list (gene)
-    return (f(np.array(individual)),)
+    #return (f(np.array(individual)),)
+    return f(individual)
 
 
 def mutate(individual, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB):
