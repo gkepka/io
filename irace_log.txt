@@ -1,0 +1,399 @@
+created virtual environment CPython3.9.6.final.0-64 in 2648ms
+  creator CPython3Posix(dest=/net/people/plgrid/plggkepka/io/.venv, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/net/people/plgrid/plggkepka/.local/share/virtualenv)
+    added seed packages: pip==21.2.2, setuptools==57.4.0, wheel==0.36.2
+  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator
+Requirement already satisfied: deap in /net/software/testing/software/SciPy-bundle/2021.10-foss-2021b/lib/python3.9/site-packages (1.3.1)
+Requirement already satisfied: numpy in /net/software/testing/software/SciPy-bundle/2021.10-foss-2021b/lib/python3.9/site-packages (from deap) (1.21.3)
+Collecting OptimizationTestFunctions
+  Downloading OptimizationTestFunctions-1.0.1-py3-none-any.whl (10 kB)
+Requirement already satisfied: numpy in /net/software/testing/software/SciPy-bundle/2021.10-foss-2021b/lib/python3.9/site-packages (from OptimizationTestFunctions) (1.21.3)
+Collecting matplotlib
+  Downloading matplotlib-3.7.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.6 MB)
+Collecting OppOpPopInit
+  Downloading OppOpPopInit-2.0.1-py3-none-any.whl (15 kB)
+Collecting importlib-resources>=3.2.0
+  Downloading importlib_resources-5.12.0-py3-none-any.whl (36 kB)
+Collecting python-dateutil>=2.7
+  Downloading python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+Collecting pyparsing>=2.3.1
+  Downloading pyparsing-3.0.9-py3-none-any.whl (98 kB)
+Collecting cycler>=0.10
+  Downloading cycler-0.11.0-py3-none-any.whl (6.4 kB)
+Collecting kiwisolver>=1.0.1
+  Downloading kiwisolver-1.4.4-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
+Collecting fonttools>=4.22.0
+  Downloading fonttools-4.39.4-py3-none-any.whl (1.0 MB)
+Collecting contourpy>=1.0.1
+  Downloading contourpy-1.0.7-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (299 kB)
+Collecting packaging>=20.0
+  Downloading packaging-23.1-py3-none-any.whl (48 kB)
+Collecting pillow>=6.2.0
+  Downloading Pillow-9.5.0-cp39-cp39-manylinux_2_28_x86_64.whl (3.4 MB)
+Collecting zipp>=3.1.0
+  Downloading zipp-3.15.0-py3-none-any.whl (6.8 kB)
+Collecting six>=1.5
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting typing-extensions
+  Downloading typing_extensions-4.6.2-py3-none-any.whl (31 kB)
+Installing collected packages: zipp, six, typing-extensions, python-dateutil, pyparsing, pillow, packaging, kiwisolver, importlib-resources, fonttools, cycler, contourpy, OppOpPopInit, matplotlib, OptimizationTestFunctions
+Successfully installed OppOpPopInit-2.0.1 OptimizationTestFunctions-1.0.1 contourpy-1.0.7 cycler-0.11.0 fonttools-4.39.4 importlib-resources-5.12.0 kiwisolver-1.4.4 matplotlib-3.7.1 packaging-23.1 pillow-9.5.0 pyparsing-3.0.9 python-dateutil-2.8.2 six-1.16.0 typing-extensions-4.6.2 zipp-3.15.0
+
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R jest oprogramowaniem darmowym i dostarczany jest BEZ JAKIEJKOLWIEK GWARANCJI.
+Możesz go rozpowszechniać pod pewnymi warunkami.
+Wpisz 'license()' lub 'licence()' aby uzyskać szczegóły dystrybucji.
+
+R jest projektem kolaboracyjnym z wieloma uczestnikami.
+Wpisz 'contributors()' aby uzyskać więcej informacji oraz
+'citation()' aby dowiedzieć się jak cytować R lub pakiety R w publikacjach.
+
+Wpisz 'demo()' aby zobaczyć demo, 'help()' aby uzyskać pomoc on-line, lub
+'help.start()' aby uzyskać pomoc w przeglądarce HTML.
+Wpisz 'q()' aby wyjść z R.
+
+> install.packages("irace", repos = "http://cran.us.r-project.org")
+gcc -I"/net/software/testing/software/R/4.2.0-foss-2021b/lib64/R/include" -DNDEBUG   -I/net/software/testing/software/OpenSSL/1.1/include -I/net/software/testing/software/libgit2/1.1.1-GCCcore-11.2.0/include -I/net/software/testing/software/MPFR/4.1.0-GCCcore-11.2.0/include -I/net/software/testing/software/GDAL/3.3.2-foss-2021b/include -I/net/software/testing/software/nodejs/14.17.6-GCCcore-11.2.0/include -I/net/software/testing/software/GLPK/5.0-GCCcore-11.2.0/include -I/net/software/testing/software/ImageMagick/7.1.0-4-GCCcore-11.2.0/include -I/net/software/testing/software/GSL/2.7-GCC-11.2.0/include -I/net/software/testing/software/UDUNITS/2.2.28-GCCcore-11.2.0/include -I/net/software/testing/software/HDF5/1.12.1-gompi-2021b/include -I/net/software/testing/software/ICU/69.1-GCCcore-11.2.0/include -I/net/software/testing/software/libsndfile/1.0.31-GCCcore-11.2.0/include -I/net/software/testing/software/FFTW/3.3.10-gompi-2021b/include -I/net/software/testing/software/NLopt/2.7.0-GCCcore-11.2.0/include -I/net/software/testing/software/GMP/6.2.1-GCCcore-11.2.0/include -I/net/software/testing/software/libxml2/2.9.10-GCCcore-11.2.0/include -I/net/software/testing/software/cURL/7.78.0-GCCcore-11.2.0/include -I/net/software/testing/software/Tk/8.6.11-GCCcore-11.2.0/include -I/net/software/testing/software/Java/11.0.2/include -I/net/software/testing/software/LibTIFF/4.3.0-GCCcore-11.2.0/include -I/net/software/testing/software/libjpeg-turbo/2.0.6-GCCcore-11.2.0/include -I/net/software/testing/software/libpng/1.6.37-GCCcore-11.2.0/include -I/net/software/testing/software/PCRE2/10.37-GCCcore-11.2.0/include -I/net/software/testing/software/SQLite/3.36-GCCcore-11.2.0/include -I/net/software/testing/software/zlib/1.2.11-GCCcore-11.2.0/include -I/net/software/testing/software/XZ/5.2.5-GCCcore-11.2.0/include -I/net/software/testing/software/bzip2/1.0.8-GCCcore-11.2.0/include -I/net/software/testing/software/ncurses/6.2-GCCcore-11.2.0/include -I/net/software/testing/software/libreadline/8.1-GCCcore-11.2.0/include -I/net/software/testing/software/cairo/1.16.0-GCCcore-11.2.0/include -I/net/software/testing/software/libGLU/9.0.2-GCCcore-11.2.0/include -I/net/software/testing/software/Mesa/21.1.7-GCCcore-11.2.0/include -I/net/software/testing/software/X11/20210802-GCCcore-11.2.0/include -I/net/software/testing/software/FlexiBLAS/3.0.4-GCC-11.2.0/include -I/net/software/testing/software/FlexiBLAS/3.0.4-GCC-11.2.0/include/flexiblas   -fpic  -O2 -ftree-vectorize -march=native -fno-math-errno  -c iracebin/irace.c -o iracebin/irace.o
+gcc  -O2 -ftree-vectorize -march=native -fno-math-errno  iracebin/irace.o -o iracebin/irace
+gcc -I"/net/software/testing/software/R/4.2.0-foss-2021b/lib64/R/include" -DNDEBUG   -I/net/software/testing/software/OpenSSL/1.1/include -I/net/software/testing/software/libgit2/1.1.1-GCCcore-11.2.0/include -I/net/software/testing/software/MPFR/4.1.0-GCCcore-11.2.0/include -I/net/software/testing/software/GDAL/3.3.2-foss-2021b/include -I/net/software/testing/software/nodejs/14.17.6-GCCcore-11.2.0/include -I/net/software/testing/software/GLPK/5.0-GCCcore-11.2.0/include -I/net/software/testing/software/ImageMagick/7.1.0-4-GCCcore-11.2.0/include -I/net/software/testing/software/GSL/2.7-GCC-11.2.0/include -I/net/software/testing/software/UDUNITS/2.2.28-GCCcore-11.2.0/include -I/net/software/testing/software/HDF5/1.12.1-gompi-2021b/include -I/net/software/testing/software/ICU/69.1-GCCcore-11.2.0/include -I/net/software/testing/software/libsndfile/1.0.31-GCCcore-11.2.0/include -I/net/software/testing/software/FFTW/3.3.10-gompi-2021b/include -I/net/software/testing/software/NLopt/2.7.0-GCCcore-11.2.0/include -I/net/software/testing/software/GMP/6.2.1-GCCcore-11.2.0/include -I/net/software/testing/software/libxml2/2.9.10-GCCcore-11.2.0/include -I/net/software/testing/software/cURL/7.78.0-GCCcore-11.2.0/include -I/net/software/testing/software/Tk/8.6.11-GCCcore-11.2.0/include -I/net/software/testing/software/Java/11.0.2/include -I/net/software/testing/software/LibTIFF/4.3.0-GCCcore-11.2.0/include -I/net/software/testing/software/libjpeg-turbo/2.0.6-GCCcore-11.2.0/include -I/net/software/testing/software/libpng/1.6.37-GCCcore-11.2.0/include -I/net/software/testing/software/PCRE2/10.37-GCCcore-11.2.0/include -I/net/software/testing/software/SQLite/3.36-GCCcore-11.2.0/include -I/net/software/testing/software/zlib/1.2.11-GCCcore-11.2.0/include -I/net/software/testing/software/XZ/5.2.5-GCCcore-11.2.0/include -I/net/software/testing/software/bzip2/1.0.8-GCCcore-11.2.0/include -I/net/software/testing/software/ncurses/6.2-GCCcore-11.2.0/include -I/net/software/testing/software/libreadline/8.1-GCCcore-11.2.0/include -I/net/software/testing/software/cairo/1.16.0-GCCcore-11.2.0/include -I/net/software/testing/software/libGLU/9.0.2-GCCcore-11.2.0/include -I/net/software/testing/software/Mesa/21.1.7-GCCcore-11.2.0/include -I/net/software/testing/software/X11/20210802-GCCcore-11.2.0/include -I/net/software/testing/software/FlexiBLAS/3.0.4-GCC-11.2.0/include -I/net/software/testing/software/FlexiBLAS/3.0.4-GCC-11.2.0/include/flexiblas   -fpic  -O2 -ftree-vectorize -march=native -fno-math-errno  -c iracebin/ablation.c -o iracebin/ablation.o
+gcc  -O2 -ftree-vectorize -march=native -fno-math-errno  iracebin/ablation.o -o iracebin/ablation
+> library("irace")
+> setwd("./tuning")
+> scenario <- readScenario(filename = "scenario.txt", scenario = defaultScenario())
+> irace.main(scenario = scenario)
+# 2023-05-25 23:51:28 CEST: 0 expression(s) specifying forbidden configurations read from '/net/people/plgrid/plggkepka/io/tuning/forbidden.txt'
+# 2023-05-25 23:51:28 CEST: Initialization
+# Elitist race
+# Elitist new instances: 1
+# Elitist limit: 2
+# nbIterations: 4
+# minNbSurvival: 4
+# nbParameters: 6
+# seed: 1189658343
+# confidence level: 0.95
+# budget: 10000
+# mu: 5
+# deterministic: FALSE
+
+# 2023-05-25 23:51:28 CEST: Iteration 1 of 4
+# experimentsUsedSoFar: 0
+# remainingBudget: 10000
+# currentBudget: 2500
+# nbConfigurations: 416
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . All alive configurations are elite and nothing is discarded
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          1|        416|         42|     87.51824293|        416|00:05:43|   NA|  NA|    NA|
+|x|          2|        416|         36|     88.22151023|        832|00:05:42|+0.94|0.97|0.0737|
+|x|          3|        416|        385|     81.41036730|       1248|00:05:41|+0.93|0.95|0.0829|
+|x|          4|        416|        385|     78.83669291|       1664|00:05:41|+0.93|0.94|0.0867|
+|-|          5|         42|         71|     87.85893112|       2080|00:05:44|+0.71|0.76|0.2630|
+|-|          6|          9|         71|     94.66343166|       2122|00:00:48|+0.43|0.53|0.4248|
+|-|          7|          4|        385|     89.92426576|       2131|00:00:38|+0.00|0.14|0.7836|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         385    mean value:      89.92426576
+Description of the best-so-far configuration:
+    .ID. breed_energy fight_energy mutation_probability crossover alpha eta .PARENT.
+385  385          148           24                0.019   uniform    NA  NA       NA
+
+# 2023-05-26 00:21:30 CEST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    breed_energy fight_energy mutation_probability crossover  alpha eta
+385          148           24               0.0190   uniform     NA  NA
+71           158           24               0.0110   uniform     NA  NA
+320          132           25               0.0176 one_point     NA  NA
+36           146           19               0.0095     blend 0.3752  NA
+# 2023-05-26 00:21:30 CEST: Iteration 2 of 4
+# experimentsUsedSoFar: 2131
+# remainingBudget: 7869
+# currentBudget: 2623
+# nbConfigurations: 331
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . All alive configurations are elite and nothing is discarded
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          8|        331|        696|     43.61855499|        331|00:04:48|   NA|  NA|    NA|
+|x|          6|        331|        696|     48.91011080|        658|00:04:46|+0.94|0.97|0.0671|
+|x|          4|        331|        696|     43.59143993|        985|00:04:46|+0.94|0.96|0.0669|
+|x|          3|        331|        696|     46.09601770|       1312|00:04:46|+0.94|0.95|0.0665|
+|-|          1|         26|        696|     44.66682854|       1639|00:04:47|+0.47|0.58|0.5279|
+|-|          7|          8|        696|     47.08160664|       1661|00:00:46|+0.75|0.79|0.2455|
+|-|          2|          6|        696|     47.49802350|       1665|00:00:41|+0.75|0.79|0.2574|
+|-|          5|          2|        696|     47.27140434|       1667|00:00:41|+0.50|0.56|0.2500|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         696    mean value:      47.27140434
+Description of the best-so-far configuration:
+    .ID. breed_energy fight_energy mutation_probability crossover  alpha eta .PARENT.
+696  696          145           25               0.0051     blend 0.1565  NA      320
+
+# 2023-05-26 00:47:36 CEST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    breed_energy fight_energy mutation_probability crossover  alpha eta
+696          145           25               0.0051     blend 0.1565  NA
+683          134           23               0.0151   uniform     NA  NA
+# 2023-05-26 00:47:36 CEST: Iteration 3 of 4
+# experimentsUsedSoFar: 3798
+# remainingBudget: 6202
+# currentBudget: 3101
+# nbConfigurations: 346
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . All alive configurations are elite and nothing is discarded
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|          9|        346|       1043|     41.77149909|        346|00:05:23|   NA|  NA|    NA|
+|x|          7|        346|        965|     44.44130243|        690|00:05:19|+0.85|0.92|0.1565|
+|x|          3|        346|        965|     43.91474977|       1034|00:05:17|+0.84|0.89|0.1427|
+|x|          8|        346|        872|     43.76045374|       1378|00:05:18|+0.84|0.88|0.1389|
+|-|          4|         41|        872|     46.00655551|       1722|00:05:25|+0.27|0.42|0.8475|
+|-|          1|         15|        872|     45.10401193|       1761|00:00:46|+0.15|0.29|0.8159|
+|-|          2|          9|        872|     45.30130554|       1774|00:00:45|+0.19|0.31|0.6223|
+|!|          5|          9|        872|     46.56007877|       1781|00:00:46|+0.17|0.27|0.6021|
+|-|          6|          8|        872|     46.82221546|       1788|00:00:44|-0.06|0.06|0.8950|
+|=|         10|          8|        872|     50.47224498|       1796|00:00:46|-0.05|0.05|0.8764|
+|=|         11|          8|        872|     50.00507014|       1804|00:00:46|-0.04|0.05|0.8869|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:         872    mean value:      50.00507014
+Description of the best-so-far configuration:
+    .ID. breed_energy fight_energy mutation_probability crossover  alpha eta .PARENT.
+872  872          148           25               0.0041     blend 0.1034  NA      696
+
+# 2023-05-26 01:18:56 CEST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+     breed_energy fight_energy mutation_probability crossover  alpha eta
+872           148           25               0.0041     blend 0.1034  NA
+876           135           25               0.0036     blend 0.2036  NA
+1074          140           25               0.0029     blend 0.1456  NA
+1035          125           25               0.0165   uniform     NA  NA
+# 2023-05-26 01:18:56 CEST: Iteration 4 of 4
+# experimentsUsedSoFar: 5602
+# remainingBudget: 4398
+# currentBudget: 4398
+# nbConfigurations: 370
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . All alive configurations are elite and nothing is discarded
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         12|        370|       1103|     37.99348906|        370|00:05:34|   NA|  NA|    NA|
+|x|          2|        370|       1233|     42.42145150|        736|00:05:32|+0.59|0.80|0.1314|
+|x|         11|        370|       1176|     40.64782569|       1102|00:05:32|+0.61|0.74|0.1080|
+|x|         10|        370|       1119|     42.73660819|       1468|00:05:33|+0.64|0.73|0.1020|
+|-|          6|         79|       1176|     42.69043545|       1834|00:05:31|-0.01|0.19|1.0311|
+|=|          8|         79|       1176|     42.53401973|       1909|00:01:20|-0.01|0.16|1.0188|
+|=|          5|         79|       1451|     44.19354989|       1984|00:01:21|-0.02|0.12|1.0113|
+|=|          4|         79|       1119|     44.17655421|       2059|00:01:21|+0.01|0.13|0.9948|
+|=|          9|         79|       1119|     44.48103593|       2134|00:01:21|+0.00|0.11|1.0110|
+|=|          1|         79|       1119|     45.25285214|       2209|00:01:21|+0.01|0.11|1.0010|
+|=|          7|         79|       1119|     45.64765540|       2284|00:01:21|+0.02|0.11|0.9913|
+|=|          3|         79|       1119|     45.43433293|       2359|00:01:21|+0.02|0.10|0.9939|
+|-|         13|         41|       1119|     45.34441878|       2438|00:01:22|-0.04|0.04|1.0151|
+|=|         14|         41|       1119|     45.54160993|       2479|00:00:47|-0.04|0.03|1.0168|
+|=|         15|         41|       1119|     46.15530670|       2520|00:00:46|-0.04|0.03|1.0105|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:        1119    mean value:      46.15530670
+Description of the best-so-far configuration:
+     .ID. breed_energy fight_energy mutation_probability crossover  alpha eta .PARENT.
+1119 1119          149           25               0.0041     blend 0.1299  NA      872
+
+# 2023-05-26 01:59:08 CEST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+     breed_energy fight_energy mutation_probability crossover  alpha eta
+1119          149           25               0.0041     blend 0.1299  NA
+1233          125           25               0.0144   uniform     NA  NA
+1265          149           25               0.0046     blend 0.1145  NA
+1176          149           25               0.0046     blend 0.1290  NA
+# 2023-05-26 01:59:08 CEST: Iteration 5 of 5
+# experimentsUsedSoFar: 8122
+# remainingBudget: 1878
+# currentBudget: 1878
+# nbConfigurations: 121
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . All alive configurations are elite and nothing is discarded
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         16|        121|       1509|     37.01567094|        121|00:02:06|   NA|  NA|    NA|
+|x|         12|        121|       1476|     40.78955120|        238|00:02:04|+0.78|0.89|0.0874|
+|x|          3|        121|       1558|     39.72789603|        355|00:02:04|+0.76|0.84|0.1022|
+|x|          9|        121|       1484|     44.76764240|        472|00:02:05|+0.76|0.82|0.1082|
+|-|          8|         33|       1119|     44.80323776|        589|00:02:04|-0.10|0.12|1.0933|
+|=|         11|         33|       1119|     44.17357003|        618|00:00:39|-0.04|0.13|1.0391|
+|=|         13|         33|       1119|     44.18669559|        647|00:00:39|-0.05|0.10|1.0193|
+|=|          2|         33|       1119|     44.24566052|        676|00:00:39|-0.03|0.10|1.0061|
+|=|          1|         33|       1508|     45.10459294|        705|00:00:39|-0.01|0.10|0.9793|
+|=|          7|         33|       1119|     45.57601702|        734|00:00:39|+0.01|0.11|0.9650|
+|=|          5|         33|       1508|     45.70081472|        763|00:00:40|+0.00|0.09|0.9742|
+|=|          4|         33|       1119|     45.34405769|        792|00:00:39|+0.01|0.09|0.9755|
+|=|         10|         33|       1119|     45.12466646|        821|00:00:39|+0.00|0.08|0.9737|
+|=|          6|         33|       1119|     45.33088489|        850|00:00:39|+0.00|0.07|0.9737|
+|=|         14|         33|       1119|     45.51583222|        879|00:00:40|-0.00|0.06|0.9758|
+|=|         15|         33|       1119|     46.09278405|        908|00:00:39|-0.00|0.06|0.9804|
+|=|         17|         33|       1119|     50.57948768|        941|00:00:43|-0.01|0.05|0.9886|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:        1119    mean value:      50.57948768
+Description of the best-so-far configuration:
+     .ID. breed_energy fight_energy mutation_probability crossover  alpha eta .PARENT.
+1119 1119          149           25               0.0041     blend 0.1299  NA      872
+
+# 2023-05-26 02:17:33 CEST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+     breed_energy fight_energy mutation_probability crossover  alpha eta
+1119          149           25               0.0041     blend 0.1299  NA
+1508          149           25               0.0037     blend 0.1184  NA
+1233          125           25               0.0144   uniform     NA  NA
+1265          149           25               0.0046     blend 0.1145  NA
+# 2023-05-26 02:17:33 CEST: Iteration 6 of 6
+# experimentsUsedSoFar: 9063
+# remainingBudget: 937
+# currentBudget: 937
+# nbConfigurations: 55
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . All alive configurations are elite and nothing is discarded
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         18|         55|       1585|     36.26389306|         55|00:01:18|   NA|  NA|    NA|
+|x|         17|         55|       1590|     41.37277979|        106|00:01:15|+0.27|0.63|0.0741|
+|x|         14|         55|       1578|     42.05265528|        157|00:01:16|+0.39|0.59|0.0603|
+|x|         16|         55|       1618|     41.06333331|        208|00:01:13|+0.41|0.56|0.1057|
+|-|          4|         22|       1618|     41.41520784|        259|00:01:17|-0.12|0.10|1.0142|
+|=|          3|         22|       1618|     41.77907102|        277|00:00:38|-0.05|0.13|0.9756|
+|=|          1|         22|       1618|     42.44934329|        295|00:00:38|-0.04|0.11|0.9940|
+|=|          6|         22|       1578|     45.12532765|        313|00:00:39|-0.04|0.09|1.0091|
+|=|         11|         22|       1265|     44.52665877|        331|00:00:39|-0.03|0.08|0.9996|
+|=|         12|         22|       1618|     45.85528454|        349|00:00:39|-0.02|0.08|0.9918|
+|=|          5|         22|       1618|     45.56277720|        367|00:00:39|-0.02|0.07|0.9927|
+|=|          8|         22|       1618|     45.44937702|        385|00:00:39|-0.03|0.06|0.9861|
+|=|          2|         22|       1618|     45.82180689|        403|00:00:39|-0.03|0.05|0.9940|
+|=|         10|         22|       1618|     45.84218709|        421|00:00:40|-0.01|0.06|0.9873|
+|=|          9|         22|       1618|     45.90254390|        439|00:00:40|+0.00|0.07|0.9778|
+|=|         15|         22|       1618|     46.09846538|        457|00:00:39|-0.01|0.05|0.9761|
+|=|          7|         22|       1618|     46.06238310|        475|00:00:38|-0.00|0.06|0.9663|
+|=|         13|         22|       1618|     46.05641878|        493|00:00:38|+0.00|0.06|0.9644|
+|=|         19|         22|       1618|     46.77557293|        515|00:00:47|+0.00|0.05|0.9661|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:        1618    mean value:      46.77557293
+Description of the best-so-far configuration:
+     .ID. breed_energy fight_energy mutation_probability crossover  alpha eta .PARENT.
+1618 1618          149           25               0.0043     blend 0.1167  NA     1508
+
+# 2023-05-26 02:33:13 CEST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+     breed_energy fight_energy mutation_probability crossover  alpha eta
+1618          149           25               0.0043     blend 0.1167  NA
+1265          149           25               0.0046     blend 0.1145  NA
+1612          149           25               0.0032     blend 0.1048  NA
+1616          149           25               0.0042     blend 0.1297  NA
+# 2023-05-26 02:33:13 CEST: Iteration 7 of 7
+# experimentsUsedSoFar: 9578
+# remainingBudget: 422
+# currentBudget: 422
+# nbConfigurations: 24
+# Markers:
+     x No test is performed.
+     c Configurations are discarded only due to capping.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+     . All alive configurations are elite and nothing is discarded
+
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|       Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+|x|         20|         24|       1628|     39.14846732|         24|00:00:39|   NA|  NA|    NA|
+|x|          1|         24|       1638|     44.15731507|         44|00:00:39|-0.31|0.34|1.2493|
+|x|          7|         24|       1637|     44.08039510|         64|00:00:39|-0.22|0.19|1.1773|
+|x|         18|         24|       1618|     44.37645352|         84|00:00:39|-0.05|0.21|1.0596|
+|=|         17|         24|       1618|     44.95598283|        104|00:00:39|+0.01|0.21|0.9768|
+|=|         11|         24|       1618|     45.19106531|        124|00:00:39|+0.02|0.18|0.9706|
+|=|          3|         24|       1618|     44.96353982|        144|00:00:39|+0.06|0.19|0.9244|
+|=|          9|         24|       1618|     45.18653974|        164|00:00:39|+0.07|0.18|0.9113|
+|=|          2|         24|       1637|     45.58789341|        184|00:00:39|+0.06|0.16|0.9294|
+|=|          6|         24|       1638|     44.59097725|        204|00:00:38|+0.03|0.13|0.9486|
+|=|         13|         24|       1637|     45.54038841|        224|00:00:39|+0.03|0.12|0.9319|
+|=|          4|         24|       1638|     44.87566464|        244|00:00:39|+0.03|0.11|0.9313|
+|=|         15|         24|       1638|     45.10085237|        264|00:00:39|+0.03|0.10|0.9434|
+|=|         14|         24|       1638|     45.11282064|        284|00:00:39|+0.03|0.10|0.9446|
+|=|         12|         24|       1618|     46.95073383|        304|00:00:39|+0.02|0.08|0.9509|
+|=|         16|         24|       1618|     46.40330031|        324|00:00:38|+0.01|0.07|0.9533|
+|=|         19|         24|       1618|     47.18665603|        344|00:00:39|+0.01|0.07|0.9561|
+|=|         10|         24|       1618|     47.12668234|        364|00:00:39|+0.01|0.06|0.9587|
+|=|          5|         24|       1618|     46.89042031|        384|00:00:39|+0.01|0.06|0.9607|
+|=|          8|         24|       1618|     46.75599805|        404|00:00:39|+0.01|0.06|0.9601|
++-+-----------+-----------+-----------+----------------+-----------+--------+-----+----+------+
+Best-so-far configuration:        1618    mean value:      46.75599805
+Description of the best-so-far configuration:
+     .ID. breed_energy fight_energy mutation_probability crossover  alpha eta .PARENT.
+1618 1618          149           25               0.0043     blend 0.1167  NA     1508
+
+# 2023-05-26 02:46:22 CEST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+     breed_energy fight_energy mutation_probability crossover  alpha eta
+1618          149           25               0.0043     blend 0.1167  NA
+1616          149           25               0.0042     blend 0.1297  NA
+1637          149           25               0.0045     blend 0.1149  NA
+1612          149           25               0.0032     blend 0.1048  NA
+# 2023-05-26 02:46:22 CEST: Stopped because there is not enough budget left to race more than the minimum (4)
+# You may either increase the budget or set 'minNbSurvival' to a lower value
+# Iteration: 8
+# nbIterations: 8
+# experimentsUsedSoFar: 9982
+# timeUsed: 0
+# remainingBudget: 18
+# currentBudget: 18
+# number of elites: 4
+# nbConfigurations: 4
+# Total CPU user time: 388304.2, CPU sys time: 1178.649, Wall-clock time: 10493.84
+# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+     breed_energy fight_energy mutation_probability crossover  alpha eta
+1618          149           25               0.0043     blend 0.1167  NA
+1616          149           25               0.0042     blend 0.1297  NA
+1637          149           25               0.0045     blend 0.1149  NA
+1612          149           25               0.0032     blend 0.1048  NA
+# Best configurations as commandlines (first number is the configuration ID; same order as above):
+1618  -b 149 -f 25 -m 0.0043 -c blend -a 0.1167
+1616  -b 149 -f 25 -m 0.0042 -c blend -a 0.1297
+1637  -b 149 -f 25 -m 0.0045 -c blend -a 0.1149
+1612  -b 149 -f 25 -m 0.0032 -c blend -a 0.1048
+
+
+# Testing of elite configurations: 1 
+# Testing iteration configurations: FALSE 
+# 2023-05-26 02:46:22 CEST: No test instances, skip testing
+ 
