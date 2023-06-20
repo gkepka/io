@@ -11,9 +11,7 @@ import itertools
 
 import igraph as ig
 
-
 g = ig.Graph.Full(3)
-#g = ig.Graph(n=3, edges=[[0,1], [1,2]], directed=True)
 
 def crossover_one_point(ind1, ind2):
     crossover_point = random.randint(1, DIMENSIONS - 1)
@@ -114,17 +112,10 @@ MIGRATION_COST = int(args.x)
 MIGRATION_PROB = float(args.v)
 
 
-#f = Rastrigin(DIMENSIONS)
-f = benchmarks.rastrigin
-
-"""
-FUNCTIONS
-"""
+f = benchmarks.sphere
 
 
 def evaluate(individual):
-    # individual is a list (gene)
-    #return (f(np.array(individual)),)
     return f(individual)
 
 
@@ -193,7 +184,6 @@ def new_generation(population: list):
     population_sorted = sorted(population, key = lambda x: x.island)
     for island, individuals in itertools.groupby(population_sorted, lambda x: x.island):
         individuals = list(individuals)
-        #individuals = population
         good_candidates = list(filter(lambda x: x.energy >= BREED_ENERGY, individuals))
         random.shuffle(good_candidates)
         if len(good_candidates) % 2 != 0:
@@ -205,21 +195,15 @@ def new_generation(population: list):
             population.append(child)
 
 
-"""
-PREPARATION OF GEN ALG
-"""
 
 creator.create("FitnessMax", base.Fitness, weights=(-1.0,))
 creator.create("Individual", list, fitness=creator.FitnessMax, energy=STARTING_ENERGY, island=0)
 
 toolbox = base.Toolbox()
 
-# Register the genetic operators
 toolbox.register("attr_float", random.uniform, LOW, HIGH)
 toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.attr_float, n=DIMENSIONS)
-
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-
 toolbox.register("evaluate", evaluate)
 toolbox.register("mate", CROSSOVER)
 toolbox.register("mutate", mutate, lower_bound=LOW, upper_bound=HIGH, indpb=MUTATION_PROB)
@@ -227,44 +211,30 @@ toolbox.register("interact", interact)
 toolbox.register("arrange_meetings", arrange_meetings)
 toolbox.register("wipe_dead", wipe_dead)
 toolbox.register("new_generation", new_generation)
-# Create the initial population
-population = toolbox.population(n=POPULATION_SIZE)
 
-"""
-MAIN LOOP
-1.  Interakcje aka fight
-2.  Usuń martwych
-3.  Rozmnóż
-"""
+population = toolbox.population(n=POPULATION_SIZE)
 
 
 def save_population():
     array = np.array(population)
     size_of_population_current = len(population)
     variances = np.var(array, axis=0)
-    #   variances_string = ",".join(map(str, variances.tolist()))
     min_var = min(variances)
     with open("results.csv", "a") as file:
         file.write(str(min_var) + "," + str(size_of_population_current) + ',' + str(evaluate(tools.selBest(population, 1)[0])[0]) + "\n")
     return
 
 
-#with open("results.csv", "w") as file:
-    #file.write("min_var,curr_pop,max_fit" + "\n")
-    # for dim in range(DIMENSIONS):
-    #     if dim != DIMENSIONS - 1:
-    #         file.write(str(dim) + ",")
-    #     else:
-    #         file.write(str(dim) + ',')
-    #         file.write("pop_size" + "\n")
-# todo eval fintessu
+with open("results.csv", "w") as file:
+    file.write("min_var,curr_pop,max_fit" + "\n")
+
 
 def sum_energy(population):
     return sum(map(lambda x: x.energy, population))
 
-for gen in range(NUM_OF_GENERATION):  # Number of generations
+for gen in range(NUM_OF_GENERATION):
     migrate(population)
-    #save_population()
+    save_population()
     toolbox.arrange_meetings(population)
     population = toolbox.wipe_dead(population)
     toolbox.new_generation(population)
